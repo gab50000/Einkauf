@@ -1,0 +1,17 @@
+{{extend 'layout.html'}}
+<h1>Items</h1>
+<ul>
+{{for i in items:}}
+<p>
+    {{=i.name}}
+    </p>
+{{pass}}
+</ul>
+<h1>Current requests</h1>
+<ul>
+{{for r in reqs:}}
+<p>
+    {{=r.req.quantity}} x {{=r.item.name}} am {{=r.req.datum}}
+    </p>
+{{pass}}
+</ul>
