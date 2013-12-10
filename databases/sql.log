@@ -76,3 +76,26 @@ CREATE TABLE purchase(
     datum DATE
 );
 success!
+timestamp: 2013-12-10T21:50:09.307628
+CREATE TABLE item(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    name CHAR(512) UNIQUE
+);
+success!
+timestamp: 2013-12-10T21:50:09.425457
+CREATE TABLE req(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    req_id INTEGER REFERENCES item (id) ON DELETE CASCADE,
+    quantity INTEGER,
+    datum DATE
+);
+success!
+timestamp: 2013-12-10T21:50:09.518961
+CREATE TABLE purchase(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    pur_id INTEGER REFERENCES req (id) ON DELETE CASCADE,
+    quantity INTEGER,
+    price DOUBLE,
+    datum DATE
+);
+success!

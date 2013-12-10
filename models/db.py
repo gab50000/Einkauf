@@ -45,6 +45,7 @@ auth = Auth(db)
 crud, service, plugins = Crud(db), Service(), PluginManager()
 
 ## create all tables needed by auth if not custom tables
+
 auth.define_tables(username=False, signature=False)
 
 ## configure email
@@ -82,7 +83,7 @@ use_janrain(auth, filename='private/janrain.key')
 
 ## after defining tables, uncomment below to enable auditing
 
-db = DAL("sqlite://liste.sqlite")
+#db = DAL("sqlite://liste.sqlite")
 
 db.define_table("item",
                 Field("name", "string", unique=True),

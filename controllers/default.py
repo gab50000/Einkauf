@@ -31,6 +31,8 @@ def user():
         @auth.requires_permission('read','table name',record_id)
     to decorate functions that need access control
     """
+    db.auth_user.last_name.readable = db.auth_user.last_name.writable=False
+    db.auth_user.email.readable = db.auth_user.email.writable=False
     return dict(form=auth())
 
 @cache.action()
