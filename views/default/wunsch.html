@@ -1,0 +1,15 @@
+{{extend 'layout.html'}}
+<h1>Einkaufswünsche bitte hier eintragen.</h1>
+
+<p>
+    Requests:
+</p>
+{{for r in req:}}
+<p>
+    {{=r.req_id.name}} wurde {{=r.quantity}} mal bestellt. Bestelldatum: {{=r.datum}}
+</p>
+{{pass}}
+<p>
+    Items:
+</p>
+{{=items}}
