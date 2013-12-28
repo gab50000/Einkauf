@@ -43,10 +43,12 @@ response.generic_patterns = ['*'] if request.is_local else []
 from gluon.tools import Auth, Crud, Service, PluginManager, prettydate
 auth = Auth(db)
 crud, service, plugins = Crud(db), Service(), PluginManager()
-
+    
+#auth.messages.label_first_name = 'Vorname'
+#auth.messages.label_password = 'Passwort'
+#auth.messages.verify_password ='Passwort bestätigen'
 ## create all tables needed by auth if not custom tables
-
-auth.define_tables(username=False, signature=False)
+auth.define_tables()
 
 ## configure email
 mail = auth.settings.mailer
@@ -93,17 +95,22 @@ db.define_table("req",
                 Field("req_id", "reference item"),
                 Field("quantity", "integer"),
                 Field("datum", "date"),
-                format="%(quantity)s")
+                format="%(req_id)s")
+
+db.define_table("shop",
+                Field("name", unique=True),
+                format="%(name)s")
 
 db.define_table("purchase",
                 Field("pur_id", "reference req"),
                 Field("quantity", "integer"),
                 Field("price", "double"),
-                Field("datum", "date"))
+                Field("datum", "date"),
+                format="%(pur_id)s")
 
 db.item.name.requires=IS_NOT_EMPTY()
-db.req.req_id.requires = IS_IN_DB(db, "item.id", "%(name)s")
-db.purchase.pur_id.requires = IS_IN_DB(db, "item.id", "%(item_id)s")
+db.req.req_id.requires = IS_IN_DB(db, "item.name", "%(name)s")
+db.purchase.pur_id.requires = IS_IN_DB(db, "req.req_id", "%(req_id)s")
 db.req.quantity.requires =  IS_INT_IN_RANGE(1,None)
 db.purchase.quantity.requires =  IS_INT_IN_RANGE(1,None)
 auth.enable_record_versioning(db)

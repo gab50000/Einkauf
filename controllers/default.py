@@ -35,6 +35,16 @@ def user():
     db.auth_user.email.readable = db.auth_user.email.writable=False
     return dict(form=auth())
 
+def wunsch():
+    return dict(req=db().select(db.req.ALL), items=SQLFORM(db.item))
+
+def notieren():
+    return dict(requests=db().select(db.req.ALL), selection = db(db.purchase.pur_id == db.item.id).select())
+
+def test():
+    query = db.purchase.pur_id == db.item.id
+    return dict(selection = db(query).select())
+
 @cache.action()
 def download():
     """
