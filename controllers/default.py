@@ -32,18 +32,23 @@ def user():
     to decorate functions that need access control
     """
     db.auth_user.last_name.readable = db.auth_user.last_name.writable=False
-    db.auth_user.email.readable = db.auth_user.email.writable=False
+    #~ db.auth_user.email.readable = db.auth_user.email.writable=False
     return dict(form=auth())
 
 def wunsch():
     return dict(req=db().select(db.req.ALL), items=SQLFORM(db.item))
 
 def notieren():
-    return dict(requests=db().select(db.req.ALL), selection = db(db.purchase.pur_id == db.item.id).select())
+    query = db.req.req_id == db.item.id == db.purchase.pur_id    
+    return dict(requests=db(db.req.req_id==db.item.id).select(db.item.name, db.req.datum, db.req.quantity), purchases = db(query).select(db.item.name, db.req.datum, db.purchase.datum, db.purchase.price, db.purchase.quantity), users = db().select(db.auth_user.ALL))
 
 def test():
-    query = db.purchase.pur_id == db.item.id
+    query = (db.purchase.pur_id == db.item.id) & (db.req.req_id == db.item.id)
+
     return dict(selection = db(query).select())
+    
+def xyz():
+    return dict()
 
 @cache.action()
 def download():

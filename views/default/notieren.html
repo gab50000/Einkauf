@@ -1,3 +1,32 @@
 {{extend 'layout.html'}}
-<h1>Hier erledigte Requests eintragen</h1>
-{{=BEAUTIFY(response._vars)}}
+<h2>Erledigte Requests</h2>
+{{summe=0}}
+<table border="1">
+    <tr>
+        <td>Artikel</td><td>Menge</td><td>Preis</td><td>Total</td><td>Datum</td>
+    </tr>
+{{for p in purchases:}}
+{{summe+= p.purchase.price*p.purchase.quantity}}
+    <tr>
+        <td>{{=p.item.name}} </td>  <td>{{=p.purchase.quantity}}</td> <td> {{=p.purchase.price}} € </td><td>{{=p.purchase.quantity*p.purchase.price}} €</td><td>{{=p.purchase.datum}}</td>
+    </tr>
+{{pass}}
+</table>
+<p>
+    Kosten gesamt: {{=summe}} €
+</p>
+<h2>
+    Anfragen
+</h2>
+<table border="1">
+    <tr>
+        <td>Artikel</td><td>Menge</td><td>Datum</td>
+    </tr>
+{{for r in requests:}}
+    <tr>
+        <td>{{=r.item.name}}</td><td>{{=r.req.quantity}}</td><td>{{=r.req.datum}}</td>
+    </tr>
+
+{{pass}}
+</table>
+{{#=BEAUTIFY(response._vars)}}

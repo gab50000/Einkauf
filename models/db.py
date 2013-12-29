@@ -95,6 +95,7 @@ db.define_table("req",
                 Field("req_id", "reference item"),
                 Field("quantity", "integer"),
                 Field("datum", "date"),
+                Field("applicant", "reference auth_user"),
                 format="%(req_id)s")
 
 db.define_table("shop",
@@ -106,6 +107,7 @@ db.define_table("purchase",
                 Field("quantity", "integer"),
                 Field("price", "double"),
                 Field("datum", "date"),
+                Field("purchaser", "reference auth_user"),
                 format="%(pur_id)s")
 
 db.item.name.requires=IS_NOT_EMPTY()
