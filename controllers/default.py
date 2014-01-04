@@ -34,10 +34,10 @@ def user():
     db.auth_user.last_name.readable = db.auth_user.last_name.writable=False
     #~ db.auth_user.email.readable = db.auth_user.email.writable=False
     return dict(form=auth())
-
+@auth.requires_login()
 def wunsch():
     return dict(req=db().select(db.req.ALL), items=SQLFORM(db.item))
-
+@auth.requires_login()
 def notieren():
     query = db.req.req_id == db.item.id == db.purchase.pur_id    
     return dict(requests=db(db.req.req_id==db.item.id).select(db.item.name, db.req.datum, db.req.quantity), purchases = db(query).select(db.item.name, db.req.datum, db.purchase.datum, db.purchase.price, db.purchase.quantity), users = db().select(db.auth_user.ALL))
