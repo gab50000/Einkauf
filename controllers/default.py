@@ -32,11 +32,12 @@ def user():
     to decorate functions that need access control
     """
     db.auth_user.last_name.readable = db.auth_user.last_name.writable=False
+    db.auth_user.first_name.readable = db.auth_user.first_name.writable=False
     #~ db.auth_user.email.readable = db.auth_user.email.writable=False
     return dict(form=auth())
 @auth.requires_login()
 def wunsch():
-    return dict(req=db().select(db.req.ALL), items=SQLFORM(db.item))
+    return dict(req=db().select(db.req.ALL), items = crud.create(db.req, fields=["req_id", "quantity"]))#items=crud.create(db().select(db.req.req_id, db.req.quantity)))
 @auth.requires_login()
 def notieren():
     query = db.req.req_id == db.item.id == db.purchase.pur_id    
@@ -47,9 +48,6 @@ def test():
 
     return dict(selection = db(query).select())
     
-def xyz():
-    return dict()
-
 @cache.action()
 def download():
     """

@@ -48,7 +48,7 @@ crud, service, plugins = Crud(db), Service(), PluginManager()
 #auth.messages.label_password = 'Passwort'
 #auth.messages.verify_password ='Passwort bestätigen'
 ## create all tables needed by auth if not custom tables
-auth.define_tables()
+auth.define_tables(username=True)
 
 ## configure email
 mail = auth.settings.mailer
@@ -116,4 +116,5 @@ db.purchase.pur_id.requires = IS_IN_DB(db, "req.req_id", "%(req_id)s")
 db.req.quantity.requires =  IS_INT_IN_RANGE(1,None)
 db.purchase.quantity.requires =  IS_INT_IN_RANGE(1,None)
 auth.enable_record_versioning(db)
-auth.settings.actions_disabled.append('register') 
+#Prevent new user registrations
+#auth.settings.actions_disabled.append('register') 
