@@ -37,7 +37,9 @@ def user():
     return dict(form=auth())
 @auth.requires_login()
 def wunsch():
-    return dict(req=db().select(db.req.ALL), items = crud.create(db.req, fields=["req_id", "quantity"]))#items=crud.create(db().select(db.req.req_id, db.req.quantity)))
+    crud.settings.create_next = URL('wunsch')
+    query = (db.req.req_id == db.item.id) & (db.req.applicant == db.auth_user.id)
+    return dict(req=db(query).select(), items = crud.create(db.req, fields=["req_id", "quantity"]))#items=crud.create(db().select(db.req.req_id, db.req.quantity)))
 @auth.requires_login()
 def notieren():
     query = db.req.req_id == db.item.id == db.purchase.pur_id    

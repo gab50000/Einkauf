@@ -113,7 +113,7 @@ db.define_table("purchase",
                 format="%(pur_id)s")
 
 db.item.name.requires=IS_NOT_EMPTY()
-db.req.req_id.requires = IS_IN_DB(db, "item.name", "%(name)s")
+db.req.req_id.requires = IS_IN_DB(db, "item.id", "%(name)s")
 db.purchase.pur_id.requires = IS_IN_DB(db, "req.req_id", "%(req_id)s")
 db.req.quantity.requires =  IS_INT_IN_RANGE(1,None)
 db.purchase.quantity.requires =  IS_INT_IN_RANGE(1,None)

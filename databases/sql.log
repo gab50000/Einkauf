@@ -1,30 +1,31 @@
-timestamp: 2013-12-04T23:15:17.237709
+timestamp: 2014-01-07T20:28:40.577802
 CREATE TABLE auth_user(
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     first_name CHAR(128),
     last_name CHAR(128),
     email CHAR(512),
+    username CHAR(128),
     password CHAR(512),
     registration_key CHAR(512),
     reset_password_key CHAR(512),
     registration_id CHAR(512)
 );
 success!
-timestamp: 2013-12-04T23:15:17.353818
+timestamp: 2014-01-07T20:28:40.686586
 CREATE TABLE auth_group(
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     role CHAR(512),
     description TEXT
 );
 success!
-timestamp: 2013-12-04T23:15:17.437512
+timestamp: 2014-01-07T20:28:40.770665
 CREATE TABLE auth_membership(
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     user_id INTEGER REFERENCES auth_user (id) ON DELETE CASCADE,
     group_id INTEGER REFERENCES auth_group (id) ON DELETE CASCADE
 );
 success!
-timestamp: 2013-12-04T23:15:17.530203
+timestamp: 2014-01-07T20:28:40.854069
 CREATE TABLE auth_permission(
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     group_id INTEGER REFERENCES auth_group (id) ON DELETE CASCADE,
@@ -33,7 +34,7 @@ CREATE TABLE auth_permission(
     record_id INTEGER
 );
 success!
-timestamp: 2013-12-04T23:15:17.624231
+timestamp: 2014-01-07T20:28:40.938434
 CREATE TABLE auth_event(
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     time_stamp TIMESTAMP,
@@ -43,7 +44,7 @@ CREATE TABLE auth_event(
     description TEXT
 );
 success!
-timestamp: 2013-12-04T23:15:17.724734
+timestamp: 2014-01-07T20:28:41.030903
 CREATE TABLE auth_cas(
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     user_id INTEGER REFERENCES auth_user (id) ON DELETE CASCADE,
@@ -53,536 +54,34 @@ CREATE TABLE auth_cas(
     renew CHAR(1)
 );
 success!
-timestamp: 2013-12-04T23:15:17.833541
+timestamp: 2014-01-07T20:28:41.122694
 CREATE TABLE item(
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     name CHAR(512) UNIQUE
 );
 success!
-timestamp: 2013-12-04T23:15:17.942238
+timestamp: 2014-01-07T20:28:41.215295
 CREATE TABLE req(
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     req_id INTEGER REFERENCES item (id) ON DELETE CASCADE,
     quantity INTEGER,
-    datum DATE
+    datum DATE,
+    applicant INTEGER REFERENCES auth_user (id) ON DELETE CASCADE
 );
 success!
-timestamp: 2013-12-04T23:15:18.050696
-CREATE TABLE purchase(
-    id INTEGER PRIMARY KEY AUTOINCREMENT,
-    pur_id INTEGER REFERENCES req (id) ON DELETE CASCADE,
-    quantity INTEGER,
-    price DOUBLE,
-    datum DATE
-);
-success!
-timestamp: 2013-12-10T21:50:09.307628
-CREATE TABLE item(
-    id INTEGER PRIMARY KEY AUTOINCREMENT,
-    name CHAR(512) UNIQUE
-);
-success!
-timestamp: 2013-12-10T21:50:09.425457
-CREATE TABLE req(
-    id INTEGER PRIMARY KEY AUTOINCREMENT,
-    req_id INTEGER REFERENCES item (id) ON DELETE CASCADE,
-    quantity INTEGER,
-    datum DATE
-);
-success!
-timestamp: 2013-12-10T21:50:09.518961
-CREATE TABLE purchase(
-    id INTEGER PRIMARY KEY AUTOINCREMENT,
-    pur_id INTEGER REFERENCES req (id) ON DELETE CASCADE,
-    quantity INTEGER,
-    price DOUBLE,
-    datum DATE
-);
-success!
-timestamp: 2013-12-10T21:56:27.192369
-CREATE TABLE Vorname(
-    id INTEGER PRIMARY KEY AUTOINCREMENT,
-    first_name CHAR(128),
-    last_name CHAR(128),
-    email CHAR(512),
-    password CHAR(512),
-    registration_key CHAR(512),
-    reset_password_key CHAR(512),
-    registration_id CHAR(512)
-);
-success!
-success!
-success!
-success!
-success!
-success!
-success!
-timestamp: 2013-12-10T21:59:29.685359
-CREATE TABLE blabla(
-    id INTEGER PRIMARY KEY AUTOINCREMENT,
-    first_name CHAR(128),
-    last_name CHAR(128),
-    email CHAR(512),
-    password CHAR(512),
-    registration_key CHAR(512),
-    reset_password_key CHAR(512),
-    registration_id CHAR(512)
-);
-success!
-success!
-success!
-success!
-success!
-success!
-success!
-timestamp: 2013-12-10T22:11:36.236447
-CREATE TABLE person(
-    id INTEGER PRIMARY KEY AUTOINCREMENT,
-    first_name CHAR(128),
-    last_name CHAR(128),
-    email CHAR(512),
-    password CHAR(512),
-    registration_key CHAR(512),
-    reset_password_key CHAR(512),
-    registration_id CHAR(512)
-);
-success!
-success!
-success!
-success!
-success!
-success!
-success!
-success!
-success!
-success!
-success!
-timestamp: 2013-12-26T13:46:40.314472
-ALTER TABLE req ADD item_id INTEGER REFERENCES item (id) ON DELETE CASCADE;
-success!
-success!
-success!
-success!
-success!
-success!
-success!
-success!
-success!
-success!
-success!
-success!
-success!
-success!
-success!
-success!
-success!
-success!
-success!
-success!
-success!
-success!
-success!
-success!
-success!
-success!
-success!
-success!
-success!
-success!
-success!
-success!
-success!
-success!
-success!
-success!
-success!
-success!
-success!
-success!
-success!
-success!
-success!
-success!
-success!
-success!
-success!
-success!
-timestamp: 2013-12-26T17:45:05.275864
+timestamp: 2014-01-07T20:28:41.298657
 CREATE TABLE shop(
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     name CHAR(512) UNIQUE
 );
 success!
-success!
-success!
-success!
-success!
-success!
-success!
-success!
-success!
-success!
-success!
-success!
-success!
-success!
-success!
-success!
-success!
-success!
-success!
-success!
-success!
-success!
-success!
-success!
-success!
-success!
-success!
-success!
-success!
-success!
-success!
-success!
-success!
-success!
-success!
-success!
-success!
-success!
-success!
-success!
-success!
-success!
-success!
-success!
-success!
-success!
-success!
-success!
-success!
-success!
-success!
-success!
-success!
-success!
-success!
-success!
-success!
-success!
-success!
-success!
-success!
-success!
-success!
-success!
-success!
-success!
-success!
-success!
-success!
-success!
-success!
-success!
-success!
-success!
-success!
-success!
-success!
-success!
-success!
-success!
-success!
-success!
-success!
-success!
-success!
-success!
-success!
-success!
-success!
-success!
-success!
-success!
-success!
-success!
-success!
-success!
-success!
-success!
-success!
-success!
-success!
-success!
-success!
-success!
-success!
-success!
-success!
-success!
-success!
-success!
-success!
-success!
-success!
-success!
-success!
-success!
-success!
-success!
-success!
-success!
-success!
-success!
-success!
-success!
-success!
-success!
-success!
-success!
-success!
-success!
-success!
-success!
-success!
-success!
-success!
-success!
-success!
-success!
-success!
-success!
-success!
-success!
-success!
-success!
-success!
-success!
-success!
-success!
-success!
-success!
-success!
-success!
-success!
-success!
-success!
-success!
-success!
-success!
-timestamp: 2013-12-29T00:02:40.206694
-ALTER TABLE req ADD applicant INTEGER REFERENCES auth_user (id) ON DELETE CASCADE;
-success!
-success!
-timestamp: 2013-12-29T00:03:19.099448
-ALTER TABLE purchase ADD purchaser INTEGER REFERENCES auth_user (id) ON DELETE CASCADE;
-success!
-success!
-success!
-success!
-success!
-success!
-success!
-success!
-success!
-success!
-success!
-success!
-success!
-success!
-success!
-success!
-success!
-success!
-success!
-success!
-success!
-success!
-success!
-success!
-success!
-success!
-success!
-success!
-success!
-success!
-success!
-success!
-success!
-success!
-success!
-success!
-success!
-success!
-success!
-success!
-success!
-success!
-success!
-success!
-success!
-success!
-success!
-success!
-success!
-success!
-timestamp: 2014-01-04T22:29:31.247399
-ALTER TABLE auth_user ADD username CHAR(128);
-success!
-success!
-success!
-success!
-success!
-success!
-success!
-success!
-success!
-success!
-success!
-success!
-success!
-success!
-success!
-success!
-success!
-success!
-success!
-success!
-success!
-success!
-success!
-success!
-success!
-success!
-success!
-success!
-success!
-success!
-success!
-success!
-success!
-success!
-success!
-success!
-success!
-success!
-success!
-success!
-success!
-success!
-success!
-success!
-success!
-success!
-success!
-success!
-success!
-success!
-success!
-success!
-success!
-success!
-success!
-success!
-success!
-success!
-success!
-success!
-success!
-success!
-success!
-success!
-success!
-success!
-success!
-success!
-success!
-success!
-success!
-success!
-success!
-success!
-success!
-success!
-success!
-success!
-success!
-success!
-success!
-success!
-success!
-success!
-success!
-success!
-success!
-success!
-success!
-success!
-success!
-success!
-success!
-success!
-success!
-success!
-success!
-success!
-success!
-success!
-success!
-success!
-success!
-success!
-success!
-success!
-success!
-success!
-success!
-success!
-success!
-success!
-success!
-success!
-success!
-success!
-success!
-success!
-success!
-success!
-success!
-success!
-success!
-success!
-success!
-success!
-success!
-success!
-success!
-success!
-success!
-success!
-success!
-success!
-success!
-success!
-success!
-success!
-success!
-success!
-success!
-success!
-success!
-success!
-success!
-success!
-success!
-success!
-success!
-success!
-success!
-success!
-success!
-success!
-success!
-success!
-success!
+timestamp: 2014-01-07T20:28:41.382786
+CREATE TABLE purchase(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    pur_id INTEGER REFERENCES req (id) ON DELETE CASCADE,
+    quantity INTEGER,
+    price DOUBLE,
+    datum DATE,
+    purchaser INTEGER REFERENCES auth_user (id) ON DELETE CASCADE
+);
 success!

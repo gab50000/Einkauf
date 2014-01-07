@@ -6,7 +6,7 @@
 </p>
 {{for r in req:}}
 <p>
-    {{=r.req_id.name}} wurde {{=r.quantity}} mal bestellt von {{=r.applicant}}. Bestelldatum: {{=r.datum}}
+    {{=r.item.name}} wurde {{=r.req.quantity}} mal bestellt von {{=r.auth_user.username}}. Bestelldatum: {{=r.req.datum}}
 </p>
 {{pass}}
 <p>
