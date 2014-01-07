@@ -41,7 +41,8 @@ def wunsch():
 @auth.requires_login()
 def notieren():
     query = db.req.req_id == db.item.id == db.purchase.pur_id    
-    return dict(requests=db(db.req.req_id==db.item.id).select(db.item.name, db.req.datum, db.req.quantity), purchases = db(query).select(db.item.name, db.req.datum, db.purchase.datum, db.purchase.price, db.purchase.quantity), users = db().select(db.auth_user.ALL))
+    return dict(requests=db(db.req.req_id==db.item.id).select(db.item.name, db.req.datum, db.req.quantity), \
+        purchases = db(query).select(db.item.name, db.req.datum, db.purchase.datum, db.purchase.price, db.purchase.quantity), users = db().select(db.auth_user.ALL))
 
 def test():
     query = (db.purchase.pur_id == db.item.id) & (db.req.req_id == db.item.id)

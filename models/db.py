@@ -52,9 +52,9 @@ auth.define_tables(username=True)
 
 ## configure email
 mail = auth.settings.mailer
-mail.settings.server = 'logging' or 'smtp.gmail.com:587'
-mail.settings.sender = 'you@gmail.com'
-mail.settings.login = 'username:password'
+mail.settings.server = 'smtp.gmail.com:587'
+mail.settings.sender = 'hamau5000@gmail.com'
+mail.settings.login = ':'
 
 ## configure auth policy
 auth.settings.registration_requires_verification = False
@@ -87,6 +87,8 @@ use_janrain(auth, filename='private/janrain.key')
 
 #db = DAL("sqlite://liste.sqlite")
 
+from datetime import date
+
 db.define_table("item",
                 Field("name", "string", unique=True),
                 format="%(name)s")
@@ -94,8 +96,8 @@ db.define_table("item",
 db.define_table("req",
                 Field("req_id", "reference item"),
                 Field("quantity", "integer"),
-                Field("datum", "date"),
-                Field("applicant", "reference auth_user"),
+                Field("datum", "date", default=date.today()),
+                Field("applicant", "reference auth_user", default=auth.user_id),
                 format="%(req_id)s")
 
 db.define_table("shop",
@@ -107,7 +109,7 @@ db.define_table("purchase",
                 Field("quantity", "integer"),
                 Field("price", "double"),
                 Field("datum", "date"),
-                Field("purchaser", "reference auth_user"),
+                Field("purchaser", "reference auth_user", default=auth.user_id),
                 format="%(pur_id)s")
 
 db.item.name.requires=IS_NOT_EMPTY()
