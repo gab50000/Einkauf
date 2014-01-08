@@ -104,6 +104,9 @@ db.define_table("shop",
                 Field("name", unique=True),
                 format="%(name)s")
 
+# db.define_table("bonuspoints",
+#                 Field())
+
 db.define_table("purchase",
                 Field("pur_id", "reference req"),
                 Field("quantity", "integer"),

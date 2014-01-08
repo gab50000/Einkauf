@@ -1,23 +1,34 @@
 {{extend 'layout.html'}}
-<h1>Items</h1>
-<ul>
-{{for i in items:}}
-<p>
-    {{=i.name}}
-    </p>
+<h2>Erledigte Requests</h2>
+{{summe=0}}
+<table border="1">
+    <tr>
+        <td>Artikel</td><td>Menge</td><td>Preis</td><td>Total</td><td>Datum</td>
+    </tr>
+{{for p in purchases:}}
+{{summe+= p.purchase.price*p.purchase.quantity}}
+    <tr>
+        <td>{{=p.item.name}} </td>  <td>{{=p.purchase.quantity}}</td> <td> {{=p.purchase.price}} € </td><td>{{=p.purchase.quantity*p.purchase.price}} €</td><td>{{=p.purchase.datum}}</td>
+    </tr>
 {{pass}}
-</ul>
-<h1>Current requests</h1>
-<ul>
+</table>
+<p>
+    Kosten gesamt: {{=summe}} €
+</p>
+<h2>
+    Anfragen
+</h2>
+<table border="1">
+    <tr>
+        <td>Artikel</td><td>Menge</td><td>Datum</td>
+    </tr>
 {{for r in reqs:}}
-<p>
-    {{=r.req.quantity}} x {{=r.item.name}} am {{=r.req.datum}}
-    </p>
+    <tr>
+        <td>{{=r.item.name}}</td><td>{{=r.req.quantity}}</td><td>{{=r.req.datum}}</td> <td> <a href={{="notieren.html?"+str(r.req.id)}} > Check as completed </td>
+    </tr>
+
 {{pass}}
-</ul>
+</table>
 <p>
 {{=LI(A("Neuer Wunsch", _href=URL("wunsch")))}}
-</p>
-<p>
-{{=LI(A("Einkäufe speichern", _href=URL("notieren")))}}
 </p>

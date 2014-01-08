@@ -13,7 +13,9 @@
 def index():
     join=db(db.req.req_id==db.item.id).select()
     items=db().select(db.item.ALL, orderby=db.item.name)
-    return dict(reqs=join, items=items)
+
+    query = db.req.req_id == db.item.id == db.purchase.pur_id
+    return dict(reqs=join, items=items, purchases = db(query).select(), users = db().select(db.auth_user.ALL))
 
 
 def user():
@@ -42,9 +44,9 @@ def wunsch():
     return dict(req=db(query).select(), items = crud.create(db.req, fields=["req_id", "quantity"]))#items=crud.create(db().select(db.req.req_id, db.req.quantity)))
 @auth.requires_login()
 def notieren():
-    query = db.req.req_id == db.item.id == db.purchase.pur_id    
-    return dict(requests=db(db.req.req_id==db.item.id).select(db.item.name, db.req.datum, db.req.quantity), \
-        purchases = db(query).select(db.item.name, db.req.datum, db.purchase.datum, db.purchase.price, db.purchase.quantity), users = db().select(db.auth_user.ALL))
+# mit request.vars auf req.id zugreifen        
+#     return dict(requests=db(db.req.req_id==db.item.id).select(db.item.name, db.req.datum, db.req.quantity), \
+#         purchases = db(query).select(db.item.name, db.req.datum, db.purchase.datum, db.purchase.price, db.purchase.quantity), users = db().select(db.auth_user.ALL))
 
 def test():
     query = (db.purchase.pur_id == db.item.id) & (db.req.req_id == db.item.id)
