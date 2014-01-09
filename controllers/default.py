@@ -49,10 +49,9 @@ def notieren():
 #     return dict(requests=db(db.req.req_id==db.item.id).select(db.item.name, db.req.datum, db.req.quantity), \
 #         purchases = db(query).select(db.item.name, db.req.datum, db.purchase.datum, db.purchase.price, db.purchase.quantity), users = db().select(db.auth_user.ALL))
 
-def test():
-    query = (db.purchase.pur_id == db.item.id) & (db.req.req_id == db.item.id)
-
-    return dict(selection = db(query).select())
+def favors():
+    query = (db.favor.von == db.auth_user.id) & (db.favor.an == db.auth_user.id)
+    return dict(users=db().select(db.auth_user.ALL), favors=db(query).select())
     
 @cache.action()
 def download():
