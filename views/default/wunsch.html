@@ -4,11 +4,13 @@
 <p>
     Requests:
 </p>
+
 {{for r in req:}}
 <p>
-    {{=r.item.name}} wurde {{=r.req.quantity}} mal bestellt von {{=r.auth_user.username}}. Bestelldatum: {{=r.req.datum}}
+    {{=r.item.name}} wurde {{=r.req.quantity}} mal bestellt von {{=r.auth_user.username}}. Bestelldatum: {{=r.req.datum.day}}.{{=r.req.datum.month}}. {{=r.req.datum.year}} um {{=r.req.datum.hour}}:{{=r.req.datum.minute}}.
 </p>
 {{pass}}
+
 <p>
     Items:
 </p>

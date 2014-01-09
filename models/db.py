@@ -87,7 +87,7 @@ use_janrain(auth, filename='private/janrain.key')
 
 #db = DAL("sqlite://liste.sqlite")
 
-from datetime import date
+from datetime import datetime
 
 db.define_table("item",
                 Field("name", "string", unique=True),
@@ -96,7 +96,7 @@ db.define_table("item",
 db.define_table("req",
                 Field("req_id", "reference item"),
                 Field("quantity", "integer"),
-                Field("datum", "date", default=date.today()),
+                Field("datum", "datetime", default=datetime.now()),
                 Field("applicant", "reference auth_user", default=auth.user_id),
                 format="%(req_id)s")
 
@@ -107,15 +107,14 @@ db.define_table("shop",
 db.define_table("favor",
                 Field("von", "reference auth_user"),
                 Field("an", "reference auth_user"),
-                Field("datum", "date", default=date.today),
-                format="%(von)s -> %(an)s"
-                )
+                Field("datum", "datetime", default=datetime.now()),
+                format="%(von)s -> %(an)s")
 
 db.define_table("purchase",
                 Field("pur_id", "reference req"),
                 Field("quantity", "integer"),
                 Field("price", "double"),
-                Field("datum", "date"),
+                Field("datum", "datetime", default=datetime.now()),
                 Field("purchaser", "reference auth_user", default=auth.user_id),
                 format="%(pur_id)s")
 

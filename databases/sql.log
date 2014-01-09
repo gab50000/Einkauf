@@ -1,4 +1,4 @@
-timestamp: 2014-01-09T10:37:17.433408
+timestamp: 2014-01-09T21:14:25.198411
 CREATE TABLE auth_user(
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     first_name CHAR(128),
@@ -11,21 +11,21 @@ CREATE TABLE auth_user(
     registration_id CHAR(512)
 );
 success!
-timestamp: 2014-01-09T10:37:17.450479
+timestamp: 2014-01-09T21:14:25.314517
 CREATE TABLE auth_group(
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     role CHAR(512),
     description TEXT
 );
 success!
-timestamp: 2014-01-09T10:37:17.466026
+timestamp: 2014-01-09T21:14:25.397600
 CREATE TABLE auth_membership(
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     user_id INTEGER REFERENCES auth_user (id) ON DELETE CASCADE,
     group_id INTEGER REFERENCES auth_group (id) ON DELETE CASCADE
 );
 success!
-timestamp: 2014-01-09T10:37:17.481093
+timestamp: 2014-01-09T21:14:25.498709
 CREATE TABLE auth_permission(
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     group_id INTEGER REFERENCES auth_group (id) ON DELETE CASCADE,
@@ -34,7 +34,7 @@ CREATE TABLE auth_permission(
     record_id INTEGER
 );
 success!
-timestamp: 2014-01-09T10:37:17.496543
+timestamp: 2014-01-09T21:14:25.590995
 CREATE TABLE auth_event(
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     time_stamp TIMESTAMP,
@@ -44,7 +44,7 @@ CREATE TABLE auth_event(
     description TEXT
 );
 success!
-timestamp: 2014-01-09T10:37:17.512101
+timestamp: 2014-01-09T21:14:25.682849
 CREATE TABLE auth_cas(
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     user_id INTEGER REFERENCES auth_user (id) ON DELETE CASCADE,
@@ -54,42 +54,42 @@ CREATE TABLE auth_cas(
     renew CHAR(1)
 );
 success!
-timestamp: 2014-01-09T10:37:17.527829
+timestamp: 2014-01-09T21:14:25.774636
 CREATE TABLE item(
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     name CHAR(512) UNIQUE
 );
 success!
-timestamp: 2014-01-09T10:37:17.544272
+timestamp: 2014-01-09T21:14:25.875600
 CREATE TABLE req(
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     req_id INTEGER REFERENCES item (id) ON DELETE CASCADE,
     quantity INTEGER,
-    datum DATE,
+    datum TIMESTAMP,
     applicant INTEGER REFERENCES auth_user (id) ON DELETE CASCADE
 );
 success!
-timestamp: 2014-01-09T10:37:17.559877
+timestamp: 2014-01-09T21:14:25.966532
 CREATE TABLE shop(
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     name CHAR(512) UNIQUE
 );
 success!
-timestamp: 2014-01-09T10:37:17.576026
+timestamp: 2014-01-09T21:14:26.068339
+CREATE TABLE favor(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    von INTEGER REFERENCES auth_user (id) ON DELETE CASCADE,
+    an INTEGER REFERENCES auth_user (id) ON DELETE CASCADE,
+    datum TIMESTAMP
+);
+success!
+timestamp: 2014-01-09T21:14:26.169083
 CREATE TABLE purchase(
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     pur_id INTEGER REFERENCES req (id) ON DELETE CASCADE,
     quantity INTEGER,
     price DOUBLE,
-    datum DATE,
+    datum TIMESTAMP,
     purchaser INTEGER REFERENCES auth_user (id) ON DELETE CASCADE
-);
-success!
-timestamp: 2014-01-09T16:50:28.910953
-CREATE TABLE favor(
-    id INTEGER PRIMARY KEY AUTOINCREMENT,
-    von INTEGER REFERENCES auth_user (id) ON DELETE CASCADE,
-    an INTEGER REFERENCES auth_user (id) ON DELETE CASCADE,
-    datum DATE
 );
 success!

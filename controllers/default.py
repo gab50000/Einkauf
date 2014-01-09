@@ -37,11 +37,13 @@ def user():
     db.auth_user.first_name.readable = db.auth_user.first_name.writable=False
     #~ db.auth_user.email.readable = db.auth_user.email.writable=False
     return dict(form=auth())
+
 @auth.requires_login()
 def wunsch():
     crud.settings.create_next = URL('wunsch')
     query = (db.req.req_id == db.item.id) & (db.req.applicant == db.auth_user.id)
     return dict(req=db(query).select(), newreq = crud.create(db.req, fields=["req_id", "quantity"]), item=crud.create(db.item))#items=crud.create(db().select(db.req.req_id, db.req.quantity)), 
+
 @auth.requires_login()
 def notieren():
     pass
