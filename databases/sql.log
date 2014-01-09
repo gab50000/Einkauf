@@ -85,3 +85,11 @@ CREATE TABLE purchase(
     purchaser INTEGER REFERENCES auth_user (id) ON DELETE CASCADE
 );
 success!
+timestamp: 2014-01-09T16:50:28.910953
+CREATE TABLE favor(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    von INTEGER REFERENCES auth_user (id) ON DELETE CASCADE,
+    an INTEGER REFERENCES auth_user (id) ON DELETE CASCADE,
+    datum DATE
+);
+success!

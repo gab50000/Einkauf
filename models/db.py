@@ -104,8 +104,12 @@ db.define_table("shop",
                 Field("name", unique=True),
                 format="%(name)s")
 
-# db.define_table("bonuspoint",
-                # Field())
+db.define_table("favor",
+                Field("von", "reference auth_user"),
+                Field("an", "reference auth_user"),
+                Field("datum", "date", default=date.today),
+                format="%(von)s -> %(an)s"
+                )
 
 db.define_table("purchase",
                 Field("pur_id", "reference req"),
