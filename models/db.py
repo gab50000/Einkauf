@@ -53,7 +53,7 @@ auth.define_tables(username=True)
 ## configure email
 mail = auth.settings.mailer
 mail.settings.server = 'smtp.gmail.com:587'
-mail.settings.sender = 'hamau5000@gmail.com'
+mail.settings.sender = '@gmail.com'
 mail.settings.login = ':'
 
 ## configure auth policy
@@ -104,8 +104,8 @@ db.define_table("shop",
                 Field("name", unique=True),
                 format="%(name)s")
 
-# db.define_table("bonuspoints",
-#                 Field())
+# db.define_table("bonuspoint",
+                # Field())
 
 db.define_table("purchase",
                 Field("pur_id", "reference req"),
